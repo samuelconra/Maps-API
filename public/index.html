@@ -1,31 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Ubicaciones</title>
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
-        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
-        crossorigin=""/>
+    <title>Gestor de Ubicaciones</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" crossorigin=""/>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Mapa de puntos de interés</h1>
-    <div id="map" style="height: 500px;"></div>
+    <div class="container">
+        <header>
+            <h1>Mapa de Puntos de Interés</h1>
+            <p>POR SAMUEL CONDE</p>
+        </header>
 
-    <form action="" id="place-form">
-        <input type="text" id="name" placeholder="Nombre" required>
-        <input type="text" id="description" placeholder="Descripción" required>
-        <input type="hidden" id="lat">
-        <input type="hidden" id="lng">
+        <main class="grid-layout">
+            <div class="map-section">
+                <div id="map"></div>
+                
+                <form id="place-form" class="card">
+                    <h3>Registrar Lugar</h3>
+                    <input type="hidden" id="place-id"> 
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" placeholder="Ej. Parque Central" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Descripción</label>
+                        <input type="text" id="description" placeholder="Breve descripción..." required>
+                    </div>
 
-        <button type="submit">Guardar Lugar</button>
-    </form>
+                    <div class="coords-display">
+                        <small>Lat: <span id="lat-display">-</span></small>
+                        <small>Lng: <span id="lng-display">-</span></small>
+                    </div>
+                    
+                    <input type="hidden" id="lat">
+                    <input type="hidden" id="lng">
 
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
-        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
-        crossorigin=""></script>
+                    <div class="form-actions">
+                        <button type="submit" id="btn-save">Guardar</button>
+                        <button type="button" id="btn-cancel" class="secondary" style="display: none;">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="list-section card">
+                <h3>Lugares Registrados</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="places-table-body"></tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" crossorigin=""></script>
     <script src="script.js"></script>
 </body>
 </html>
